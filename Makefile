@@ -1,10 +1,14 @@
+CC = gcc
+CPPFLAGS = -Iinclude
 TARGET = bin/dbview
 SRC = $(wildcard src/*.c)
 OBJ = $(patsubst src/%.c, obj/%.o, $(SRC))
 
 run: clean default
 	./$(TARGET) -f ./mynewdb.db -n 
-	./$(TARGET) -f ./mynewdb.db -a "Timmy H.,123 Sheshire Ln.,120"
+	./$(TARGET) -f ./mynewdb.db
+	./$(TARGET) -n 
+	./$(TARGET)
 
 default: $(TARGET)
 
@@ -14,9 +18,9 @@ clean:
 	rm -f *.db
 
 $(TARGET): $(OBJ)
-	gcc -o $@ $?
+	$(CC) -o $@ $?
 
 obj/%.o : src/%.c
-	gcc -c $< -o $@ -Iinclude
+	$(CC) -c $< -o $@ $(CPPFLAGS)
 
 
