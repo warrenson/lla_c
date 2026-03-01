@@ -8,6 +8,7 @@ run: clean default
 	-./$(TARGET)
 	./$(TARGET) -f ./mynewdb.db -n
 	./$(TARGET) -f ./mynewdb.db -a "Super Cow,root ln,13"
+	./$(TARGET) -f ./mynewdb.db -l
 
 test:
 	-./$(TARGET) -n

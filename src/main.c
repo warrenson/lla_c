@@ -22,14 +22,18 @@ int main(int argc, char *argv[]) {
     char *author = NULL;
     char *addstring = NULL;
     bool newfile = false;
+    bool list = false;
     int c;
 
     int dbfd = -1;
     struct dbheader_t *dbheader = NULL;
     struct employee_t *employees = NULL;
 
-    while ((c = getopt(argc, argv, "nf:a:")) != -1) {
+    while ((c = getopt(argc, argv, "lnf:a:")) != -1) {
         switch (c) {
+        case 'l':
+            list = true;
+            break;
         case 'n':
             newfile = true;
             break;
@@ -83,9 +87,11 @@ int main(int argc, char *argv[]) {
         add_employee(dbheader, &employees, addstring);
     }
 
-    list_employees(dbheader, employees);
+    if (list) {
+        list_employees(dbheader, employees);
+    }
 
-    // FINALLY
+    // FINALLY (because it mangles the dbheader)
     output_file(dbfd, dbheader, employees);
 
     return 0;

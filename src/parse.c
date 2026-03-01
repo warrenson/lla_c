@@ -14,8 +14,10 @@ void list_employees(struct dbheader_t *dbhdr, struct employee_t *employees) {
     int i = 0;
     printf("%-32s%-32s%-5s\n", "NAME", "ADDRESS", "HOURS");
     for (; i < dbhdr->count; i++) {
-        printf("%-32s%-32s%-5u\n", employees[i].name, employees[i].address,
-               employees[i].hours);
+        printf("Employee %d\n", i);
+        printf("\tName: %s\n", employees[i].name);
+        printf("\tAddress: %s\n", employees[i].address);
+        printf("\tHours: %u\n", employees[i].hours);
     }
 }
 
