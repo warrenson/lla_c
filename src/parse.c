@@ -10,7 +10,7 @@
 #include "common.h"
 #include "parse.h"
 
-void list_employees(struct dbheader_t *dbhdr, struct employee_t *employees) {
+int list_employees(struct dbheader_t *dbhdr, struct employee_t *employees) {
     int i = 0;
     printf("%-32s%-32s%-5s\n", "NAME", "ADDRESS", "HOURS");
     for (; i < dbhdr->count; i++) {
@@ -19,6 +19,7 @@ void list_employees(struct dbheader_t *dbhdr, struct employee_t *employees) {
         printf("\tAddress: %s\n", employees[i].address);
         printf("\tHours: %u\n", employees[i].hours);
     }
+    return STATUS_SUCCESS;
 }
 
 int add_employee(struct dbheader_t *dbhdr, struct employee_t **employees,
