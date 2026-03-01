@@ -14,7 +14,7 @@ void list_employees(struct dbheader_t *dbhdr, struct employee_t *employees) {
     int i = 0;
     printf("%-32s%-32s%-5s\n", "NAME", "ADDRESS", "HOURS");
     for (; i < dbhdr->count; i++) {
-        printf("%-32s%-32s%-5u\n", employees[i].name, employees[i].addr,
+        printf("%-32s%-32s%-5u\n", employees[i].name, employees[i].address,
                employees[i].hours);
     }
 }
@@ -33,8 +33,8 @@ int add_employee(struct dbheader_t *dbhdr, struct employee_t **employees,
     char *name = strtok(addstring, ",");
     if (NULL == name)
         return STATUS_ERROR;
-    char *addr = strtok(NULL, ",");
-    if (NULL == addr)
+    char *address = strtok(NULL, ",");
+    if (NULL == address)
         return STATUS_ERROR;
     char *hours = strtok(NULL, ",");
     if (NULL == hours)
@@ -49,7 +49,8 @@ int add_employee(struct dbheader_t *dbhdr, struct employee_t **employees,
     dbhdr->count++;
 
     strncpy(e[dbhdr->count - 1].name, name, sizeof(e[dbhdr->count - 1].name));
-    strncpy(e[dbhdr->count - 1].addr, addr, sizeof(e[dbhdr->count - 1].addr));
+    strncpy(e[dbhdr->count - 1].address, address,
+            sizeof(e[dbhdr->count - 1].address));
     e[dbhdr->count - 1].hours = atoi(hours);
 
     // Update employees
