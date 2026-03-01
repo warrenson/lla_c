@@ -9,8 +9,11 @@
 
 void print_usage(char *argv[]) {
     printf("Usage: %s [-n] -f <database_file>\n", argv[0]);
-    printf("\t -n            - create new database file\n");
-    printf("\t -f <filepath> - (required) path to database file\n");
+    printf("\t -n             - create new database file\n");
+    printf("\t -f <filepath>  - (required) path to database file\n");
+    printf("\t -l             - List employees\n");
+    printf("\t -a <addstring> - Add employee from string: "
+           "'<name>,<address>,<hours>'\n");
     return;
 }
 
@@ -77,14 +80,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (addstring) {
-        dbheader->count++;
-        employees =
-            realloc(employees, dbheader->count * (sizeof(struct employee_t)));
-        if (employees == NULL) {
-            printf("Failed to allocate memory for new employee\n");
-            return -1;
-        }
-        add_employee(dbheader, employees, addstring);
+        add_employee(dbheader, &employees, addstring);
     }
 
     list_employees(dbheader, employees);
